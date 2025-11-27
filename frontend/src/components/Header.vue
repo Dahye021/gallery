@@ -7,14 +7,14 @@ import {useRouter} from "vue-router";
 const accountStore = useAccountStore();
 
 // 라우터 객체
-const router = useRouter(); // ②
+const router = useRouter();
 
 // 로그아웃
-// 로그아웃
-const logoutAccount = async () => { // ③
+const logoutAccount = async () => {
   const res = await logout();
 
   if (res.status === 200) {
+    accountStore.setAccessToken(""); // ① 로그 아웃을 위한 메서드 수정, 로그 아웃 성공시 계정 스토어의 액세스 토큰 값을 초기화하여 이후 HTTP 요청에서 토큰이 사용되지 않도록
     accountStore.setLoggedIn(false);
     await router.push("/");
   }
@@ -23,13 +23,13 @@ const logoutAccount = async () => { // ③
 
 <template>
   <header>
-    <div class="navbar navbar-dark bg-dark text-white shadow-sm">
+    <div class="navbar navbar-dark text-white shadow-sm">
       <div class="container">
         <router-link to="/" class="navbar-brand">
-          <strong>Gallery</strong>
+          <strong>Music Gallery</strong>
         </router-link>
         <div class="menus d-flex gap-3">
-          <template v-if="!accountStore.loggedIn">  <!-- ④ -->
+          <template v-if="!accountStore.loggedIn">
             <router-link to="/login">로그인</router-link>
             <router-link to="/join">회원가입</router-link>
           </template>
@@ -46,8 +46,11 @@ const logoutAccount = async () => { // ③
 
 <style lang="scss">
 header {
+  .navbar {
+    background-color: #decdf7;
+  }
   .menus {
-    a { // ⑦
+    a {
       cursor: pointer;
       color: #fff;
       text-decoration: none;

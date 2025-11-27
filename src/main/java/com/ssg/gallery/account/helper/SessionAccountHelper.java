@@ -42,7 +42,7 @@ public class SessionAccountHelper implements AccountHelper {
         }
 
         // 세션에 회원 PK 저장
-        HttpUtils.setSession(request, AccountConstants.Member_ID_NAME, member.getId());
+        HttpUtils.setSession(request, AccountConstants.MEMBER_ID_NAME, member.getId());
 
         // 로그인 아이디 반환
         return member.getLoginId();
@@ -51,7 +51,7 @@ public class SessionAccountHelper implements AccountHelper {
     // 회원 아이디 조회
     @Override
     public Integer getMemberId(HttpServletRequest request) {
-        Object memberId = HttpUtils.getSession(request, AccountConstants.Member_ID_NAME);
+        Object memberId = HttpUtils.getSession(request, AccountConstants.MEMBER_ID_NAME);
         if (memberId != null) {
             return (int) memberId;
         }
@@ -66,6 +66,6 @@ public class SessionAccountHelper implements AccountHelper {
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response) {
-        HttpUtils.removeSession(request, AccountConstants.Member_ID_NAME);
+        HttpUtils.removeSession(request, AccountConstants.MEMBER_ID_NAME);
     }
 }

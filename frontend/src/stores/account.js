@@ -1,19 +1,20 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia' 
-   // 피니아에서 제공하는 defineStore 메서드를 호출해서 스토어를 정의하였다. 
-   // 계정 데이터를 다루는 계정 스토어
+import {defineStore} from 'pinia'
 
-export const useAccountStore = defineStore("account", { // ① "account" 스토어의 고유아이디
+export const useAccountStore = defineStore("account", {
     state: () => ({
-        checked: false, // ② 사용자의 로그인 체크 여부 프로퍼티
-        loggedIn: false, // ③ 사용자의 로그인 여부 프로퍼티
+        checked: false,
+        loggedIn: false,
+        accessToken: "", // ①  액세스 토큰 프로퍼티 문자열 타입
     }),
     actions: {
-        setChecked(val) { // ④   사용자의 로그인 체크 여부 값을 수정하는 메서드
+        setChecked(val) {
             this.checked = val;
         },
-        setLoggedIn(val) { // ⑤ 사용자의 로그인 여부 값을 수정하는 메서드
+        setLoggedIn(val) {
             this.loggedIn = val;
+        },
+        setAccessToken(val) { // ② 액세스 토큰의 값 수정 메서드
+            this.accessToken = val;
         },
     },
 });

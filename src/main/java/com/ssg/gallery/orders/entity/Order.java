@@ -1,4 +1,4 @@
-package com.ssg.gallery.orders.entity;   // 변경
+package com.ssg.gallery.orders.entity;
 
 import com.ssg.gallery.orders.dto.OrderRead;
 import jakarta.persistence.*;
@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+// gallery/order/entity/Order.java  수정한다
 @Getter
 @Entity
 @Table(name = "orders")
@@ -28,7 +29,7 @@ public class Order {
     @Column(length = 10, nullable = false)
     private String payment;
 
-    @Column(length = 16)
+    @Column(length = 50)
     private String cardNumber;
 
     @Column(nullable = false)
@@ -50,7 +51,8 @@ public class Order {
         this.amount = amount;
     }
 
-    public OrderRead toRead() { // ②
+    // 주문 조회 DTO로 변환
+    public OrderRead toRead() {
         return OrderRead.builder()
                 .id(id)
                 .name(name)
